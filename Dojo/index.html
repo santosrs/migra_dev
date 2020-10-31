@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <style>
+      body {
+        margin: 0;    
+      }
+      
+      .grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, 50px);
+          grid-auto-rows: 100px;
+          grid-gap: 25px 5px;
+          place-content: center;
+          place-items: stretch;
+      }
+      
+      .grid div {
+          border: 1px solid;
+      }
+      
+      
+      .areas {
+          display: grid;
+          grid-template-areas: 
+            "imagem descricao" 
+            "imagem autor";
+      }
+      
+      .imagem {
+          grid-area: imagem;
+      }
+      
+      .descricao {
+          grid-area: descricao;
+      }
+      
+      .autor {
+          grid-area: autor;
+      }
+      
+       .areas div {
+          border: 1px solid;
+       }
+       
+       .container {
+           display: grid;
+           grid-template: 
+               "cabecalho cabecalho" 75px
+                "menu conteudo" minmax(calc(100vh - 110px), auto)
+                "rodape rodape" 35px 
+                / minmax(200px, 20%) 80%;
+       }
+       
+       .container div {
+           border: 1px solid;
+       }
+       
+       .conteudo {
+           grid-area: conteudo;
+       }
+       
+       .cabecalho { 
+            grid-area: cabecalho;
+        }
+        
+        .menu { 
+            grid-area: menu; 
+        }
+        
+        .rodape { 
+            grid-area: rodape; 
+        }
+        
+        @media only screen and (max-width: 728px) {
+           .areas {
+              grid-template-areas: 
+                "imagem"
+                "descricao"
+                "autor";
+          }
+          
+         .container {
+               grid-template: 
+               "cabecalho" 75px
+                "menu" 50px
+                "conteudo" minmax(calc(100vh - 110px), auto)
+                "rodape" 35px;
+           }
+        }
+
+      
+  </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="cabecalho">Cabeçalho</div>
+        <div class="menu">Menu</div>
+        
+        <div class="conteudo">
+            
+             <div class="grid">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+            
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+            </div>
+            
+            <div class="areas">
+                <div class="imagem">Imagem</div>
+                <div class="descricao">Descricao</div>
+                <div class="autor">Autor</div>
+            </div>
+        </div>
+        
+      <div class="rodape">Rodape</div>
+      
+    </div>
+</body>
+</html>

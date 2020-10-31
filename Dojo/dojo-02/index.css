@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 20px rgba(50,50,50,0.20);
+    padding: 0;
+    font-family: 'Manrope', sans-serif;
+    color: hsl(217, 19%, 35%);
+    margin: 5%;
+    border-radius: 10px;
+    max-width: 900px;
+    background-color: white;
+}
+
+
+/*  top - cima */
+/*  bottom - baixo */
+/*  left - esquerda */
+/*  right - direita */
+/*  width - largura */
+/*  height - altura */
+
+
+.imagem{
+    width: 400px;
+    height: 300px;
+    padding: 0px;
+    border-spacing: 0;
+    overflow: hidden;
+    align-items: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.imagem img{
+  
+    width: 100%;
+    height: 100%;
+}
+
+.texto{
+    flex:1;
+    padding:50px;
+    
+    
+}
+
+.botao{
+    display: flex;
+    width: 35px;
+    height: 35px;
+    border-radius: 18px;
+    margin: 0px;
+    align-items: center;
+    border: none;
+    justify-content: center;
+}
+
+
+}
+
+footer {
+    display: flex;
+    width: 100%;
+    
+}
+
+.botaoFoto{
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.textoRodape{
+    text-align: left;
+    flex:1;
+    margin: 20px;
+}
+#rodape{
+    display: flex;
+    flex:3;
+    align-items: center;
+    height: 50px;
+    margin-top: 50px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 21px;
+    font-weight: 500;
+}
+
+         
+        .textoRodape p {
+            text-align: left;
+            margin: 0px;
+        }
+        
+        
+
+
+@media only screen and (max-width: 936px){
+    .imagem{
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 0px;
+        }
+
+}
