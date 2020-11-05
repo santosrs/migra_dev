@@ -1,5 +1,5 @@
 exports.configs = {
-    api_usuario: {
-        http_port: 3001,
-    },
+  api_usuario: {
+    http_port: 3001,
+  },
 };
