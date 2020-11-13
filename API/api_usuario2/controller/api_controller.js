@@ -45,106 +45,36 @@ exports.listar = async function(req, res, next) {
     }
 };
 
-exports.buscar = async function(req, res, nex) {
+exports.buscar = async function(req, res, next) {
     try {
+        const conexao = await sql.connect(dbConfig);
         let idUsuario = req.params.id;
-
-        let usuarios = [{
-                id: 1,
-                nome: "Marcelo",
-                email: "marcelo@teste.com",
-                senha: "teste2112",
-            },
-            {
-                id: 2,
-                nome: "Maria",
-                email: "maria@teste.com",
-                senha: "teste2112",
-            },
-            {
-                id: 3,
-                nome: "Jose",
-                email: "jose@teste.com",
-                senha: "teste2112",
-            },
-        ];
-
-        let usuario = usuarios.find((x) => x.id == idUsuario);
-
-        if (!usuario) {
+        let usuario = await conexao.request().input('id', idUsuario).query('DELETE from TB_USUARIO WHERE ID = @id')
+        console.log(usuario)
+        if (!usuario.recordset) {
             res.send("Usuário não encontrado");
+        } else {
+            res.send("Usuario deletado")
         }
-
-        res.send(usuario);
     } catch (error) {
         res.send(400, { status: false, error_code: 400, message: error.message });
-    }
-};
 
-exports.atualizar = async function(req, res, next) {
-    try {
-        let usuarios = [{
-                id: 1,
-                nome: "Marcelo",
-                email: "marcelo@teste.com",
-                senha: "teste2112",
-            },
-            {
-                id: 2,
-                nome: "Maria",
-                email: "maria@teste.com",
-                senha: "teste2112",
-            },
-            {
-                id: 3,
-                nome: "Jose",
-                email: "jose@teste.com",
-                senha: "teste2112",
-            },
-        ];
-
-        let dados = req.body;
-
-        //buscar no dbanco de dados
-        let usuario = usuarios.find((x) => x.id == dados.id);
-
-        usuario.nome = dados.novoNome;
-
-        //atualizar no banco de dados
-
-        res.send({ mensagem: "usuario atualizado!", usuario });
-    } catch (error) {
-        res.send(400, { status: false, error_code: 400, message: error.message });
     }
 };
 
 exports.deletar = async function(req, res, next) {
     try {
-        let usuarios = [{
-                id: 1,
-                nome: "Marcelo",
-                email: "marcelo@teste.com",
-                senha: "teste2112",
-            },
-            {
-                id: 2,
-                nome: "Maria",
-                email: "maria@teste.com",
-                senha: "teste2112",
-            },
-            {
-                id: 3,
-                nome: "Jose",
-                email: "jose@teste.com",
-                senha: "teste2112",
-            },
-        ];
-        let id = req.params.id;
-
-        usuarios = usuarios.filter((x) => x.id != id);
-
-        res.send(usuarios);
+        const conexao = await sql.connect(dbConfig);
+        let idUsuario = req.params.id;
+        let usuarioEncontrado = await conexao.request().input('id', idUsuario).query('select * from TB_USUARIO WHERE ID = @id');
+        if (usuarioEncontrado.recordset.length == 0) {
+            res.send("Usuário não encontrado");
+        } else {
+            let usuario = await conexao.request().input('id', idUsuario).query('DELETE from TB_USUARIO WHERE ID = @id');
+            res.send("Usuário Deletado");
+        }
     } catch (error) {
         res.send(400, { status: false, error_code: 400, message: error.message });
+
     }
 };

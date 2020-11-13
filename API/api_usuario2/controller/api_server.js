@@ -26,7 +26,7 @@ server.use(restify.plugins.queryParser());
 server.post("/api_usuario2/cadastrar", api_controller.cadastrar);
 server.get("/api_usuario2/listar", api_controller.listar);
 server.get("/api_usuario2/buscar/:id", api_controller.buscar);
-server.put("/api_usuario2/atualizar", api_controller.atualizar);
+//server.put("/api_usuario2/atualizar", api_controller.atualizar);
 server.del("/api_usuario2/deletar/:id", api_controller.deletar);
 
 exports.server = server;
