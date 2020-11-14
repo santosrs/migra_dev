@@ -49,12 +49,12 @@ exports.buscar = async function(req, res, next) {
     try {
         const conexao = await sql.connect(dbConfig);
         let idUsuario = req.params.id;
-        let usuario = await conexao.request().input('id', idUsuario).query('DELETE from TB_USUARIO WHERE ID = @id')
+        let usuario = await conexao.request().input('id', idUsuario).query('select * from TB_USUARIO WHERE ID = @id');
         console.log(usuario)
-        if (!usuario.recordset) {
+        if (usuario.recordset.length == 0) {
             res.send("Usuário não encontrado");
         } else {
-            res.send("Usuario deletado")
+            res.send(usuario.recordsets);
         }
     } catch (error) {
         res.send(400, { status: false, error_code: 400, message: error.message });
