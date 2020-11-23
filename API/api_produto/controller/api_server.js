@@ -25,5 +25,5 @@ server.use(restify.plugins.queryParser());
 
 //server.post("/api_produto/cadastrar", controller.cadastrar);
 //server.del("/api_produto/deletar/:id", controller.deletar);
-server.put("/api_produto/atualizar/:id", controller.atualizar);
+server.put("/api_produto/atualizar", controller.atualizar);
 exports.server = server;

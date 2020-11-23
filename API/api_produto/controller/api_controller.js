@@ -47,7 +47,7 @@ exports.deletar = async function(req, res, next) {
 exports.atualizar = async function(req, res, next) {
     try {
         const conexao = await sql.connect(dbConfig);
-        let idProduto = req.params.id;
+        let idProduto = req.body.id;
         let ProdutosEncontrado = await conexao.request()
             .input('id', idProduto)
             .query('select * from TB_PRODUTO where ID = @id');
@@ -58,7 +58,7 @@ exports.atualizar = async function(req, res, next) {
                 .input('id', idProduto)
                 .input('nome', sql.VarChar, req.body.nome)
                 .input('descricao', sql.VarChar, req.body.descricao)
-                .query('update TB_PRODUTO SET NOME = @nome , DESCRICAO = @descricao SET NOME = @nome where ID = @id');
+                .query('update TB_PRODUTO SET NOME = @nome , DESCRICAO = @descricao  where ID = @id');
             res.send("Produto Atualizado!!");
         }
     } catch (error) {
