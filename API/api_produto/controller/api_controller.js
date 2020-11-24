@@ -58,7 +58,7 @@ exports.atualizar = async function(req, res, next) {
                 .input('id', idProduto)
                 .input('nome', sql.VarChar, req.body.nome)
                 .input('descricao', sql.VarChar, req.body.descricao)
-                .query('update TB_PRODUTO SET NOME = @nome , DESCRICAO = @descricao  where ID = @id');
+                .query('update TB_PRODUTO SET NOME = coalesce(@nome,NOME) , DESCRICAO = COALESCE(@descricao,DESCRICAO)  where ID = @id');
             res.send("Produto Atualizado!!");
         }
     } catch (error) {
