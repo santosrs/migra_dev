@@ -52,7 +52,7 @@ exports.atualizar = async function(req, res, next) {
             .input('id', idProduto)
             .query('select * from TB_PRODUTO where ID = @id');
         if (ProdutosEncontrado.recordset.length == 0) {
-            res.send('Produto não Encontadro!!');
+            res.send('Produto não Encontrado!!');
         } else {
             let Produtos = await conexao.request()
                 .input('id', idProduto)
@@ -61,6 +61,39 @@ exports.atualizar = async function(req, res, next) {
                 .query('update TB_PRODUTO SET NOME = @nome , DESCRICAO = @descricao  where ID = @id');
             res.send("Produto Atualizado!!");
         }
+    } catch (error) {
+        res.send(400, error.message)
+    }
+};
+
+exports.listar = async function(req, res, next) {
+    try {
+        const conexao = await sql.connect(dbConfig);
+        let listarproduto = await conexao.request()
+            .query('SELECT * FROM TB_PRODUTO');
+        res.send(listarproduto.recordsets);
+
+    } catch (error) {
+        res.send(400, error.message)
+    }
+
+};
+
+
+exports.buscar = async function(req, res, next) {
+    try {
+        const conexao = await sql.connect(dbConfig);
+        let idProduto = req.params.id;
+        let buscarproduto = await conexao.request()
+            .input('id', idProduto)
+            .query('SELECT * FROM TB_PRODUTO WHERE ID = @id')
+
+        if (buscarproduto.recordset.length == 0) {
+            res.send("Usuário não encontrado");
+        } else {
+            res.send(buscarproduto.recordsets);
+        }
+
     } catch (error) {
         res.send(400, error.message)
     }
