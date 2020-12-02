@@ -58,7 +58,7 @@ exports.atualizar = async function(req, res, next) {
                 .input('id', idProduto)
                 .input('nome', sql.VarChar, req.body.nome)
                 .input('descricao', sql.VarChar, req.body.descricao)
-                .query('update TB_PRODUTO SET NOME = coalesce(@nome,NOME) , DESCRICAO = COALESCE(@descricao,DESCRICAO)  where ID = @id');
+                .query('update TB_PRODUTO SET NOME = COALESCE(@nome,NOME) , DESCRICAO = COALESCE(@descricao,DESCRICAO)  where ID = @id');
             res.send("Produto Atualizado!!");
         }
     } catch (error) {
@@ -70,8 +70,8 @@ exports.listar = async function(req, res, next) {
     try {
         const conexao = await sql.connect(dbConfig);
         let listarproduto = await conexao.request()
-            .query('SELECT * FROM TB_PRODUTO');
-        res.send(listarproduto.recordsets);
+            .query('SELECT NOME AS \'nome\', DESCRICAO AS \'descricao\', ID AS \'id\'  FROM TB_PRODUTO');
+        res.send(listarproduto.recordset);
 
     } catch (error) {
         res.send(400, error.message)

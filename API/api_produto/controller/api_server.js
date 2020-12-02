@@ -28,4 +28,5 @@ server.del("/api_produto/deletar/:id", controller.deletar);
 server.put("/api_produto/atualizar", controller.atualizar);
 server.get("/api_produto/listar", controller.listar);
 server.get("/api_produto/buscar/:id", controller.buscar);
+
 exports.server = server;
